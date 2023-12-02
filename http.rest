@@ -1,0 +1,35 @@
+# @url=http://localhost:3000
+@url=https://lahman-backend.onrender.com
+@userid=656b0910e456ec24e7561eb0
+//check database connection
+POST {{url}}/user/signup
+Content-Type: application/json
+
+{ 
+  "name":"vaibhav",
+  "username":"vaibhav_kumar1",
+  "email":"vaibhatezan2@gmail.omc",
+  "password":"vaibhav",
+  "image":"thi is image "
+}   
+
+###
+
+POST {{url}}/user/login
+Content-Type: application/json
+
+{   "username":"vaibhav kumar",
+    "email":"vaibhatezan@gmail.omc",
+    "password":"vaibhav"
+}
+
+
+###
+
+
+PATCH {{url}}/user/{{userid}}/updateuser
+Content-Type: application/json
+
+{
+    "email":"vaibhatezan@gmail.omc"
+}
