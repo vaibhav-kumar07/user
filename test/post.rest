@@ -1,11 +1,16 @@
-# @url=http://localhost:3000/user
-@url=https://user-nuox.onrender.com/user
+@url=http://localhost:3000/user
+# @url=https://user-nuox.onrender.com/user
 @userid=656c1cd8892354c226458da4
 @PostId=656c1ce6892354c226458da7
 @commentorid=656c28273b461da9b89e5d4c
 
 
+###
+GET {{url}}/posts
+Content-Type: application/json
 
+
+###
 GET {{url}}/{{userid}}/posts
 Content-Type: application/json
 

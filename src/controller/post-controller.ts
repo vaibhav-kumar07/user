@@ -65,6 +65,17 @@ export async function updatePost(req: Request, res: Response) {
     }
 }
 
+export async function get(req: Request, res: Response) {
+    try {
+
+        const posts = await Post.find();
+        res.json(posts);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+
 export async function getPostsByUserId(req: Request, res: Response) {
     const { id: userId } = req.params;
 
