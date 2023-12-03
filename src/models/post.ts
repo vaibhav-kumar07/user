@@ -13,7 +13,9 @@ const postSchema: Schema<Post> = new mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     comments: [commentSchema],
     likes: [{ type: String }],
+    bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     createdAt: { type: Date, default: Date.now },
+
     updatedAt: { type: Date, required: true },
 });
 
