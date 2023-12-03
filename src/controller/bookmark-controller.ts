@@ -16,15 +16,14 @@ export const addBookmark = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        const userid = new mongoose.Types.ObjectId(id);
 
         // Check if the post is already bookmarked
-        if (post.bookmarks.includes(userid)) {
+        if (post.bookmarks.includes(id)) {
             return res.status(400).json({ message: 'Post already bookmarked' });
         }
 
         // Add user to bookmarks
-        post.bookmarks.push(userid);
+        post.bookmarks.push(id);
         await post.save();
 
         res.status(200).json({ message: 'Bookmark added successfully' });
@@ -48,15 +47,14 @@ export const removeBookmark = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        const userid = new mongoose.Types.ObjectId(id);
-
         // Check if the post is bookmarked
-        if (!post.bookmarks.includes(userid)) {
+        const index = post.bookmarks.indexOf(id);
+        if (index === -1) {
             return res.status(400).json({ message: 'Post is not bookmarked' });
         }
 
         // Remove user from bookmarks
-        post.bookmarks = post.bookmarks.filter((bookmark) => bookmark !== userid);
+        post.bookmarks.splice(index, 1);
         await post.save();
 
         res.status(200).json({ message: 'Bookmark removed successfully' });
