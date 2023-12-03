@@ -60,3 +60,10 @@ Content-Type: application/json
 DELETE {{url}}/{{userid}}/posts/{{PostId}}/unlike
 Content-Type: application/json
 
+###
+POST {{url}}/{{userid}}/posts/{{PostId}}/bookmark
+Content-Type: application/json
+
+### Unlike a Post
+DELETE {{url}}/{{userid}}/posts/{{PostId}}/bookmark
+Content-Type: application/json
