@@ -17,4 +17,9 @@ const postSchema: Schema<Post> = new mongoose.Schema({
     updatedAt: { type: Date, required: true },
 });
 
+postSchema.pre(['findOne', 'find'], function (next) {
+    this.populate('user');
+    next();
+});
+
 export default mongoose.model<Post>('Post', postSchema);
