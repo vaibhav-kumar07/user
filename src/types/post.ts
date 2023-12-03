@@ -17,4 +17,5 @@ export interface Post {
     likes: string[];
     createdAt?: Date;
     updatedAt?: Date;
+    bookmarks: mongoose.Types.ObjectId[],
 }
