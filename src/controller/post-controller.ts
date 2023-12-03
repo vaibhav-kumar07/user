@@ -56,8 +56,8 @@ async function updatePost(req: Request, res: Response) {
         }
 
         post.content = content;
-        const updatedPost = await post.save();
-        res.json(updatedPost);
+        await post.save();
+        res.json({ message: 'Post updated successfully' });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }

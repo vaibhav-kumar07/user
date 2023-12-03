@@ -35,8 +35,8 @@ export async function likePost(req: Request, res: Response) {
         post.likes.push(userId);
 
         // Save the updated post
-        const updatedPost = await post.save();
-        res.json(updatedPost);
+        await post.save();
+        res.json({ message: 'Post liked successfully' });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
@@ -75,7 +75,7 @@ export async function unlikePost(req: Request, res: Response) {
 
         // Save the updated post
         const updatedPost = await post.save();
-        res.json(updatedPost);
+        res.json({ message: 'Post unliked successfully' });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
