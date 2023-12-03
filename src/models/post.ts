@@ -18,7 +18,10 @@ const postSchema: Schema<Post> = new mongoose.Schema({
 });
 
 postSchema.pre(['findOne', 'find'], function (next) {
-    this.populate('user');
+    this.populate({
+        path: 'user',
+        select: '_id username  image',
+    });
     next();
 });
 
