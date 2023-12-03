@@ -1,14 +1,14 @@
 @url=http://localhost:3000/user
-@url=https://user-nuox.onrender.com/user
+# @url=https://user-nuox.onrender.com/user
 @userid=656c1cd8892354c226458da4
 //check database connection
 POST {{url}}/signup
 Content-Type: application/json
 
 { 
-  "name":"vaibhav2",
-  "username":"vaibhav_kumar112",
-  "email":"vaibhatezan12@email.com",
+  "name":"vaibhav3",
+  "username":"vaibhav_kumar1123",
+  "email":"vaibhatezan123@email.com",
   "password":"vaibhav",
   "image":"thi is image "
 }   
@@ -18,9 +18,9 @@ Content-Type: application/json
 POST {{url}}/login
 Content-Type: application/json
 
-{   "username":"vaibhav kumar",
-    "email":"vaibhatezan@gmail.omc",
-    "password":"vaibhav"
+{   
+  "username":"vaibhav_kumar112",
+  "password":"vaibhav"
 }
 
 

@@ -53,7 +53,7 @@ export const signUp = async (req: Request, res: Response) => {
 
         // If both email and username are unique, proceed to save the user
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ name, username, email, password: hashedPassword, image });
+        const user = new User({ name, username, email, password: hashedPassword, image, updatedAt: new Date() });
         await user.save();
 
         res.status(201).json({ message: 'User created successfully', _id: user._id });
@@ -65,32 +65,19 @@ export const signUp = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
     try {
-        const { username, email, password } = req.body;
-
-        // Validate that either username or email is provided
-        if (!username && !email) {
-            return res.status(400).json({ message: 'Either username or email must be provided' });
+        const { username, password } = req.body;
+        // Validate the username using the validator library
+        console.log("suername an dpass", username, password)
+        if (!usernameRegexPattern.test(username)) {
+            return res.status(400).json({ message: 'Username must be alphanumeric' });
         }
-
-        const validationRules: ValidationRule[] = [
-            { field: 'email', regex: emailRegexPattern, errorMessage: 'Invalid email address' },
-        ];
-
-        // Validate fields
-        validateFields({ email }, validationRules, res);
 
         let user;
-
-        // Find the user by either username or email
-        if (username) {
-            user = await User.findOne({ username });
-        } else {
-            user = await User.findOne({ email });
-        }
-
+        user = await User.findOne({ username });
+        console.log("usernam", user)
         // Check if the user exists and the password is correct
         if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(401).json({ message: 'Invalid username, email, or password' });
+            return res.status(401).json({ message: 'Invalid username,or  password' });
         }
 
         res.status(200).json({
