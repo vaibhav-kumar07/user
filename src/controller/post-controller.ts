@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import User from '../models/user';
 import Post from '../models/post';
 
-async function createPost(req: Request, res: Response) {
+export async function createPost(req: Request, res: Response) {
     const { id: userId } = req.params;
     const { title, content } = req.body;
 
@@ -24,6 +24,7 @@ async function createPost(req: Request, res: Response) {
             title,
             content,
             user: userId,
+            updatedAt: new Date()
         });
 
         await newPost.save();
@@ -33,7 +34,7 @@ async function createPost(req: Request, res: Response) {
     }
 }
 
-async function updatePost(req: Request, res: Response) {
+export async function updatePost(req: Request, res: Response) {
     const { id: userId, postId } = req.params;
     const { content } = req.body;
 
@@ -56,6 +57,7 @@ async function updatePost(req: Request, res: Response) {
         }
 
         post.content = content;
+        post.updatedAt = new Date();
         await post.save();
         res.json({ message: 'Post updated successfully' });
     } catch (error: any) {
@@ -63,7 +65,45 @@ async function updatePost(req: Request, res: Response) {
     }
 }
 
-async function deletePost(req: Request, res: Response) {
+export async function getPostsByUserId(req: Request, res: Response) {
+    const { id: userId } = req.params;
+
+    try {
+        // Check if the user ID is a valid ObjectId
+        if (!Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({ message: 'Invalid user ID format' });
+        }
+
+        // Find posts by user ID
+        const posts = await Post.find({ user: userId });
+        res.json(posts);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export async function getPostDetails(req: Request, res: Response) {
+    const { id: userId, postId } = req.params;
+
+    try {
+        // Check if the user ID and post ID are valid ObjectIds
+        if (!Types.ObjectId.isValid(userId) || !Types.ObjectId.isValid(postId)) {
+            return res.status(400).json({ message: 'Invalid user ID or post ID format' });
+        }
+
+        // Check if the post exists and belongs to the user
+        const post = await Post.findOne({ _id: postId, user: userId });
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found or does not belong to the user' });
+        }
+
+        res.json(post);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+export async function deletePost(req: Request, res: Response) {
     const { id: userId, postId } = req.params;
 
     try {
@@ -92,4 +132,3 @@ async function deletePost(req: Request, res: Response) {
     }
 }
 
-export { createPost, updatePost, deletePost };

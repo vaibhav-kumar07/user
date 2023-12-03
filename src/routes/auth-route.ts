@@ -1,6 +1,6 @@
 import express from "express";
 import { signUp, login, updateProfile } from '../controller/auth-controller';
-import { createPost, updatePost, deletePost } from '../controller/post-controller';
+import { createPost, updatePost, deletePost, getPostDetails, getPostsByUserId } from '../controller/post-controller';
 import { addComment, deleteComment } from "../controller/comment-controller"
 import { likePost, unlikePost } from "../controller/like-controller";
 const router = express.Router();
@@ -8,6 +8,13 @@ const router = express.Router();
 router.post('/signup', signUp);
 router.post('/login', login);
 router.patch("/:id/updateuser", updateProfile);
+
+
+
+// GET all posts
+router.get('/:id/posts', getPostsByUserId);
+// GET posts for a particular user and post ID
+router.get('/:id/posts/:postId', getPostDetails);
 
 // Posts Routes
 router.post('/:id/posts', createPost);

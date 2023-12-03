@@ -14,7 +14,7 @@ const postSchema: Schema<Post> = new mongoose.Schema({
     comments: [commentSchema],
     likes: [{ type: String }],
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, required: true },
 });
 
 export default mongoose.model<Post>('Post', postSchema);

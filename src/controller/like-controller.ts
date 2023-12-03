@@ -73,8 +73,8 @@ export async function unlikePost(req: Request, res: Response) {
         // Remove the user from the likes array
         post.likes = post.likes.filter((like) => like.toString() !== userId);
 
-        // Save the updated post
-        const updatedPost = await post.save();
+
+        await post.save();
         res.json({ message: 'Post unliked successfully' });
     } catch (error: any) {
         res.status(500).json({ message: error.message });

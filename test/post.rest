@@ -2,6 +2,16 @@
 @userid=656c1cd8892354c226458da4
 @PostId=656c1ce6892354c226458da7
 @commentorid=656c28273b461da9b89e5d4c
+
+
+
+GET {{url}}/{{userid}}/posts
+Content-Type: application/json
+
+###get by postid
+GET {{url}}/{{userid}}/posts/{{PostId}}
+Content-Type: application/json
+
 ### Create a Post
 POST {{url}}/{{userid}}/posts
 Content-Type: application/json

@@ -8,7 +8,7 @@ const userSchema: Schema<User & { updatedAt: Date; updatedBy: string; }> = new S
     password: { type: String, required: true, trim: true },
     image: { type: String, required: true, trim: true },
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+    updatedAt: { type: Date, required: true }
 });
 
 export default mongoose.model<User & { updatedAt: Date; updatedBy: string; }>('User', userSchema);
