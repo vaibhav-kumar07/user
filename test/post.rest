@@ -1,0 +1,46 @@
+@url=http://localhost:3000/user
+@userid=656c1cd8892354c226458da4
+@PostId=656c1ce6892354c226458da7
+@commentorid=656c28273b461da9b89e5d4c
+### Create a Post
+POST {{url}}/{{userid}}/posts
+Content-Type: application/json
+
+{
+    "content": "This is the content of the new post"
+}
+
+### Update a Post
+PATCH {{url}}/{{userid}}/posts/{{PostId}}
+Content-Type: application/json
+
+{
+    "content": "Updated content of the post"
+}
+
+### Delete a Post
+DELETE {{url}}/{{userid}}/posts/{{PostId}}
+
+
+### Add a Comment to a Post
+POST {{url}}/{{userid}}/posts/{{PostId}}/comments
+Content-Type: application/json
+
+{
+    "commenter":"656c28273b461da9b89e5d4c", 
+    "comment": "This is another  new comment"
+}
+
+### Delete a Comment from a Post
+DELETE {{url}}/{{userid}}/posts/{{PostId}}/comments/656c285f3b461da9b89e5d50
+
+
+
+### Like a Post
+POST {{url}}/{{userid}}/posts/{{PostId}}/like
+Content-Type: application/json
+
+### Unlike a Post
+DELETE {{url}}/{{userid}}/posts/{{PostId}}/unlike
+Content-Type: application/json
+

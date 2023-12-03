@@ -8,6 +8,8 @@ interface ValidationRule {
     errorMessage: string;
 }
 
+const emailRegexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const usernameRegexPattern = /^[a-zA-Z0-9_]+$/;
 const handleServerError = (error: any, res: Response) => {
     console.error(error);
     res.status(500).json({ message: 'Internal Server Error' });
@@ -31,8 +33,8 @@ export const signUp = async (req: Request, res: Response) => {
         const { name, username, email, password, image } = req.body;
 
         const validationRules: ValidationRule[] = [
-            { field: 'email', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorMessage: 'Invalid email address' },
-            { field: 'username', regex: /^[a-zA-Z0-9_]+$/, errorMessage: 'Invalid username' },
+            { field: 'email', regex: emailRegexPattern, errorMessage: 'Invalid email address' },
+            { field: 'username', regex: usernameRegexPattern, errorMessage: 'Invalid username' },
         ];
 
         validateFields({ email, username }, validationRules, res);
@@ -71,7 +73,7 @@ export const login = async (req: Request, res: Response) => {
         }
 
         const validationRules: ValidationRule[] = [
-            { field: 'email', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorMessage: 'Invalid email address' },
+            { field: 'email', regex: emailRegexPattern, errorMessage: 'Invalid email address' },
         ];
 
         // Validate fields
@@ -107,8 +109,8 @@ export const updateProfile = async (req: Request, res: Response) => {
         const { email, username, name, image } = req.body;
 
         const validationRules: ValidationRule[] = [
-            { field: 'email', regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, errorMessage: 'Invalid email address' },
-            { field: 'username', regex: /^[a-zA-Z0-9_]+$/, errorMessage: 'Invalid username' },
+            { field: 'email', regex: emailRegexPattern, errorMessage: 'Invalid email address' },
+            { field: 'username', regex: usernameRegexPattern, errorMessage: 'Invalid username' },
         ];
 
         validateFields({ email, username }, validationRules, res);
@@ -123,6 +125,8 @@ export const updateProfile = async (req: Request, res: Response) => {
         if (username) user.username = username;
         if (name !== undefined) user.name = name;
         if (image) user.image = image;
+        user.updatedAt = new Date();
+
 
         await user.save();
 

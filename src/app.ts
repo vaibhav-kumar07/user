@@ -1,29 +1,32 @@
-// app.ts
 import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
-import {
-    initMongoDB,
-    isMongoDBConnected,
-    disconnectMongoDB,
-    retryMongoDBConnection,
-} from './dbutil';
-import user from "./routes/auth-route"
+import helmet from 'helmet';
+import mongoose from 'mongoose';
+import { initMongoDB, disconnectMongoDB, retryMongoDBConnection } from './dbutil';
+import userRoutes from './routes/auth-route';
+
 dotenv.config();
 
 const app = express();
-app.use(cors());
 const PORT = process.env.PORT || 3000;
+
+// Enhance security with Helmet middleware
+app.use(helmet());
+
+// Enable CORS with specific options
+app.use(cors());
 
 app.use(express.json());
 
-app.use("/user", user)
+// Define your routes
+app.use('/user', userRoutes);
 
 // Initialize MongoDB connection
 initMongoDB()
     .then(() => {
         // Start the server if MongoDB is connected
-        if (isMongoDBConnected()) {
+        if (mongoose.connection.readyState === 1) {
             app.listen(PORT, () => {
                 console.log(`Server is running on http://localhost:${PORT}`);
             });
