@@ -17,7 +17,7 @@ const postSchema: Schema<Post> = new mongoose.Schema({
     updatedAt: { type: Date, required: true },
 });
 
-postSchema.pre('find', function (next) {
+postSchema.pre(['find', 'findOne'], function (next) {
     this.populate({
         path: 'user',
         select: '_id username image',
