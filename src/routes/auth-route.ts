@@ -13,7 +13,7 @@ router.patch("/:id/updateuser", updateProfile);
 
 router.get('/:id/posts', get);
 // GET all posts for partifcular id
-router.get('/:id/posts', getPostsByUserId);
+router.get('/:id/allposts', getPostsByUserId);
 // GET posts for a particular user and post ID
 router.get('/:id/posts/:postId', getPostDetails);
 

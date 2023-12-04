@@ -1,5 +1,5 @@
-@url=http://localhost:3000/user
-# @url=https://user-nuox.onrender.com/user
+# @url=http://localhost:3000/user
+@url=https://user-nuox.onrender.com/user
 @userid=656c1cd8892354c226458da4
 @PostId=656cc7a9ace017cf547676ce
 @commentorid=656c7e00d01810e86dc01063
@@ -27,11 +27,11 @@ Content-Type: application/json
 }
 
 ### Update a Post
-POST {{url}}/{{userid}}/posts/{{PostId}}
+PATCH {{url}}/{{userid}}/posts/{{PostId}}
 Content-Type: application/json
 
 {
-    "content": "Updated content of the post"
+    "content": "Updated content again of the post"
 }
 
 ### Delete a Post
@@ -50,7 +50,10 @@ Content-Type: application/json
 ### Delete a Comment from a Post
 DELETE {{url}}/{{userid}}/posts/{{PostId}}/comments/656c285f3b461da9b89e5d50
 
-
+###
+#get
+GET {{url}}/{{userid}}/posts/{{PostId}}
+Content-Type: application/json
 
 ### Like a Post
 POST {{url}}/{{userid}}/posts/{{PostId}}/like
