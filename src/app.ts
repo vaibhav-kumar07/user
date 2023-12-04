@@ -10,15 +10,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-const corsOptions = {
-    origin: process.env.CORSORIGINURL,
-    optionsSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-
-app.use(express.json());
+app.use(cors()).use(express.json());
 
 // Define your routes
 app.use('/user', userRoutes);
