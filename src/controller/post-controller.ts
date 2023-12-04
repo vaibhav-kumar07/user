@@ -67,7 +67,16 @@ export async function updatePost(req: Request, res: Response) {
 
 export async function get(req: Request, res: Response) {
     try {
+        const { id } = req.params;
+        if (!Types.ObjectId.isValid(id)) {
+            return res.status(400).json({ message: 'Invalid user ID format' });
+        }
 
+        // Find posts by user ID
+        const user = await User.findOne({ _id: -id });
+        if (!user) {
+            return res.status(403).json({ message: 'User not authorized' });
+        }
         const posts = await Post.find();
         res.json(posts);
     } catch (error: any) {

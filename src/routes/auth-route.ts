@@ -8,10 +8,10 @@ const router = express.Router();
 
 router.post('/signup', signUp);
 router.post('/login', login);
-router.post("/:id/updateuser", updateProfile);
+router.patch("/:id/updateuser", updateProfile);
 
 
-router.get('/posts', get);
+router.get('/:id/posts', get);
 // GET all posts for partifcular id
 router.get('/:id/posts', getPostsByUserId);
 // GET posts for a particular user and post ID
@@ -19,7 +19,7 @@ router.get('/:id/posts/:postId', getPostDetails);
 
 // Posts Routes
 router.post('/:id/posts', createPost);
-router.post('/:id/posts/:postId', updatePost);
+router.patch('/:id/posts/:postId', updatePost);
 router.delete('/:id/posts/:postId', deletePost);
 
 // Comments Routes

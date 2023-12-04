@@ -1,5 +1,5 @@
-import cors from 'cors';
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { initMongoDB, disconnectMongoDB, retryMongoDBConnection } from './dbutil';
@@ -10,8 +10,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable CORS
-app.use(cors());
+// Enable CORS with allowed origin(s)
+app.use(cors({
+    origin: 'https://user-nuox.onrender.com', // Replace with the actual origin of your frontend
+}));
 
 app.use('/user', userRoutes);
 

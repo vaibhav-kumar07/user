@@ -1,5 +1,5 @@
-@url=http://localhost:3000/user
-# @url=https://user-nuox.onrender.com/user
+# @url=http://localhost:3000/user
+@url=https://user-nuox.onrender.com/user
 @userid=656c1cd8892354c226458da4
 @PostId=656cc7a9ace017cf547676ce
 @commentorid=656c7e00d01810e86dc01063
@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ### Update a Post
-PATCH {{url}}/{{userid}}/posts/{{PostId}}
+POST {{url}}/{{userid}}/posts/{{PostId}}
 Content-Type: application/json
 
 {
