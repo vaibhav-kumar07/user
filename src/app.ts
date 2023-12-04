@@ -1,7 +1,6 @@
 import cors from 'cors';
 import express from 'express';
 import dotenv from 'dotenv';
-import helmet from 'helmet';
 import mongoose from 'mongoose';
 import { initMongoDB, disconnectMongoDB, retryMongoDBConnection } from './dbutil';
 import userRoutes from './routes/auth-route';
