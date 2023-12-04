@@ -11,9 +11,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Use helmet for security headers
-app.use(helmet());
-
 // Enable CORS
 app.use(cors());
 
