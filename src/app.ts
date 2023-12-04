@@ -12,7 +12,11 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Enable CORS with allowed origin(s)
-app.use(cors()).use(json())
+app.use(
+    cors({
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    })
+).use(json());
 
 app.use('/user', userRoutes);
 

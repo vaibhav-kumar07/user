@@ -59,7 +59,7 @@ export async function deleteComment(req: Request, res: Response) {
         }
 
         // Check if the post exists and belongs to the user
-        const post = await Post.findOne({ _id: postId, });
+        const post = await Post.findOne({ _id: postId, user: userId });
         if (!post) {
             return res.status(404).json({ message: 'Post not found or does not belong to the user' });
         }
@@ -70,17 +70,12 @@ export async function deleteComment(req: Request, res: Response) {
             return res.status(404).json({ message: 'Comment not found' });
         }
 
-        // Check if the user is the owner of the post
-        if (post.user.toString() !== userId) {
-            return res.status(403).json({ message: 'Unauthorized: You are not the owner of the post' });
-        }
-
         // Remove the comment from the post
         post.comments.splice(commentIndex, 1);
 
         // Save the updated post
         await post.save();
-        res.json("Comment removed successfully");
+        res.json({ message: 'Comment removed successfully' });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
