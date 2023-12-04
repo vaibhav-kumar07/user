@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 export const initMongoDB = async () => {
     const MONGO_URI = process.env.MONGO_URI;
     const MONGO_DB_NAME = process.env.MONGO_DB_NAME;
-    const MONGO_TIMEOUT = process.env.MONGO_TIMEOUT || 15000;
+    const MONGO_TIMEOUT = process.env.MONGO_TIMEOUT || 30000;
 
     if (!MONGO_URI) throw new Error("MONGO_URI and MONGO_DB_NAME is required in the dotenv file");
     if (!MONGO_DB_NAME)
