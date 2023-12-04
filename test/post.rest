@@ -48,7 +48,7 @@ Content-Type: application/json
 }
 
 ### Delete a Comment from a Post
-DELETE {{url}}/{{userid}}/posts/{{PostId}}/comments/656c285f3b461da9b89e5d50
+DELETE {{url}}/{{userid}}/posts/{{PostId}}/comments/656e21ab93364b1171e0df38
 
 ###
 #get

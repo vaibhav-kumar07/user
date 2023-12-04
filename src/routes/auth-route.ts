@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/signup', signUp);
 router.post('/login', login);
-router.patch("/:id/updateuser", updateProfile);
+router.post("/:id/updateuser", updateProfile);
 
 
 router.get('/:id/posts', get);
@@ -19,7 +19,7 @@ router.get('/:id/posts/:postId', getPostDetails);
 
 // Posts Routes
 router.post('/:id/posts', createPost);
-router.patch('/:id/posts/:postId', updatePost);
+router.post('/:id/posts/:postId', updatePost);
 router.delete('/:id/posts/:postId', deletePost);
 
 // Comments Routes
