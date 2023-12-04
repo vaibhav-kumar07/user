@@ -20,7 +20,7 @@ export async function addComment(req: Request, res: Response) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        const post = await Post.findOne({ _id: postId, user: userId });
+        const post = await Post.findOne({ _id: postId });
         if (!post) {
             return res.status(404).json({ message: 'Post not found or does not belong to the user' });
         }
@@ -59,7 +59,7 @@ export async function deleteComment(req: Request, res: Response) {
         }
 
         // Check if the post exists and belongs to the user
-        const post = await Post.findOne({ _id: postId, user: userId });
+        const post = await Post.findOne({ _id: postId, });
         if (!post) {
             return res.status(404).json({ message: 'Post not found or does not belong to the user' });
         }

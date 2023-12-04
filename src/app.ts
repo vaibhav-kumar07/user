@@ -11,11 +11,12 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enhance security with Helmet middleware
-app.use(helmet());
+const corsOptions = {
+    origin: process.env.CORSORIGINURL,
+    optionsSuccessStatus: 200,
+};
 
-// Enable CORS with specific options
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use(express.json());
 

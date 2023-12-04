@@ -19,10 +19,14 @@ const postSchema: Schema<Post> = new mongoose.Schema({
     updatedAt: { type: Date, required: true },
 });
 
-postSchema.pre(['findOne', 'find'], function (next) {
+postSchema.pre('findOne', function (next) {
     this.populate({
         path: 'user',
-        select: '_id username  image',
+        select: '_id username image',
+    });
+    this.populate({
+        path: 'comments.commenter',
+        select: '_id username image', // Adjust this as per your User schema
     });
     next();
 });
