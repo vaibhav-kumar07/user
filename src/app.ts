@@ -10,9 +10,13 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(cors()).use(express.json());
 
-// Define your routes
+// Use helmet for security headers
+app.use(helmet());
+
+// Enable CORS
+app.use(cors());
+
 app.use('/user', userRoutes);
 
 // Initialize MongoDB connection
